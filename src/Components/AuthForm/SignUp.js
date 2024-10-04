@@ -1,10 +1,20 @@
 import React from 'react';
 import "./AuthForm.css"
+import {useDispatch, useSelector} from "react-redux";
+import {closeModal} from "../../store/modals/modals-slice";
 
 function SignUp(props) {
+
+    const {showSignUp} = useSelector(state => state.MODAL);
+    const dispatch = useDispatch();
+
+    const closeModals = () => {
+        dispatch(closeModal());
+    }
+
     return (
-        <div className="global-modal">
-            <div className="overlay"></div>
+        <div className={showSignUp ? "global-modal" : "hide-modal"}>
+            <div onClick={closeModals} className="overlay"></div>
 
             <div className="container-modal">
                 <form className={"form-auth"}>
@@ -17,9 +27,9 @@ function SignUp(props) {
                     <input type="password" id="confirmpsw" required/>
                     <button className="btn-sign">S'inscrire</button>
                 </form>
-                <button className="btn-close">X</button>
+                <button onClick={closeModals} className="btn-close">X</button>
                 <p className="bottom-help-txt">
-                Besoin de creer un compte ?
+                    Besoin de creer un compte ?
                 </p>
             </div>
         </div>

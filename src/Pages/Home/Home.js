@@ -12,8 +12,8 @@ function Home(props) {
                 <h1>Bienvenue sur le site.</h1>
                 <p>Authentifiez-vous pour acceder aux fonctionnalites.</p>
             </div>
-            {/*<SignUp/>*/}
-            {/*<SignIn/>*/}
+            <SignUp/>
+            <SignIn/>
         </div>
     );
 }
