@@ -1,14 +1,14 @@
 import React, {useContext, useRef, useState} from 'react';
 import "./AuthForm.css"
 import {useDispatch, useSelector} from "react-redux";
-import {closeModal} from "../../store/modals/modals-slice";
+import {closeModal, toggleIn} from "../../store/modals/modals-slice";
 import {AuthContext} from "../../contexts/Authcontext";
-// import {useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 
 
 function SignUp(props) {
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const [error, setError] = useState('')
 
@@ -27,14 +27,18 @@ function SignUp(props) {
         }
 
         await signup(inputs.current[0].value, inputs.current[1].value);
-        // navigate("/loggedHome");
-        dispatch(closeModal())
+        closeModals();
+        navigate("/loggedHome");
     }
 
     const addInput = (el) => {
         if (el && !inputs.current.includes(el)) {
             inputs.current.push(el);
         }
+    }
+
+    const toggleSignIn = () => {
+        dispatch(toggleIn());
     }
 
     const closeModals = () => {
@@ -58,8 +62,8 @@ function SignUp(props) {
                     <button className="btn-sign">S'inscrire</button>
                 </form>
                 <button onClick={closeModals} className="btn-close">X</button>
-                <p className="bottom-help-txt">
-                    Besoin de creer un compte ?
+                <p onClick={toggleSignIn} className="bottom-help-txt">
+                    Besoin de se connecter ?
                 </p>
             </div>
         </div>

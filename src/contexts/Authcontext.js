@@ -17,18 +17,20 @@ export const AuthProvider = ({children}) => {
     }
 
     function logout() {
-        return signOut(auth)
+        return  signOut(auth);
     }
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, initializeUser);
 
-        return unsubscribe
+        return () => unsubscribe();
     }, []);
 
     async function initializeUser(user) {
         if (user) {
             setCurrentUser({...user});
+        } else {
+            setCurrentUser(null)
         }
     }
 
